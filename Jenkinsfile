@@ -14,6 +14,7 @@ environment {
     ARTIFACT_FOLDER = "target"
     PORT = 8080;
 }
+stages {
 stage('Get Latest Code') {
   steps {
     git branch: "${GIT_BRANCH}", url: "${GIT_REPO}" // declared in environment
@@ -72,4 +73,5 @@ stage("DEPLOY TO DEV") {
           }
       }
   }
+}
 }
