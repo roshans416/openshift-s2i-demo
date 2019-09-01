@@ -1,0 +1,35 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  creationTimestamp: null
+  labels:
+    run: java-app
+  name: java-app
+spec:
+  replicas: 1
+  selector:
+    run: java-app
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: java-app
+    spec:
+      containers:
+      - image: docker-registry.default.svc:5000/hpe-demo/java-app:latest
+        name: java-app
+        resources:
+          limits:
+            cpu: 50m
+            memory: 125Mi
+  test: false
+  triggers: null
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
