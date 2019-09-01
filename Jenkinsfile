@@ -15,17 +15,17 @@ environment {
     PORT = 8080;
 }
 stages {
-stage('Get Latest Code') {
-  steps {
-    git branch: "${GIT_BRANCH}", url: "${GIT_REPO}" // declared in environment
+  stage('Get Latest Code') {
+    steps {
+      git branch: "${GIT_BRANCH}", url: "${GIT_REPO}" // declared in environment
+    }
   }
-}
-stage('UNIT TESTS') {
+  stage('UNIT TESTS') {
     steps {
         sh "mvn test"
     }
 }
-stage('PRE-BUILD') {
+  stage('PRE-BUILD') {
     when {
         expression {
             openshift.withCluster() {
@@ -46,7 +46,7 @@ stage('PRE-BUILD') {
     }
 }
 
-stage('BUILD') {
+  stage('BUILD') {
   steps {
     script {
       openshift.withCluster() {
@@ -58,7 +58,7 @@ stage('BUILD') {
   }  
 }
 
-stage("DEPLOY TO DEV") {
+  stage("DEPLOY TO DEV") {
   steps {
     script {
         openshift.withCluster() {
@@ -68,10 +68,10 @@ stage("DEPLOY TO DEV") {
                 def dc = openshift.selector("dc", "${APP_NAME}")
                 while (dc.object().spec.replicas != dc.object().status.availableReplicas) {
                     sleep 10
-                  }
-              }
-          }
-      }
+                    }
+                 }
+            }
+        }
+    }
   }
-}
 }
