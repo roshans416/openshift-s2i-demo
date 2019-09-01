@@ -19,11 +19,11 @@ stages {
       git branch: "${GIT_BRANCH}", url: "${GIT_REPO}" // declared in environment
     }
   }
-  stage('UNIT TESTS') {
-    steps {
-        sh "mvn test"
-    }
-}
+//  stage('UNIT TESTS') {
+//   steps {
+//       sh "mvn test"
+//    }
+//}
   stage('PRE-BUILD') {
     when {
         expression {
