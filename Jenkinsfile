@@ -2,7 +2,6 @@ pipeline {
     agent {
       node {label 'maven'}
     }
-}
 environment {
     APP_NAME = "java-app"
     GIT_REPO="http://github.com/roshans416/openshift-s2i-demo"
@@ -74,4 +73,5 @@ stages {
         }
     }
   }
+}
 }
