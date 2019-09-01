@@ -1,0 +1,45 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: java-app
+  name: java-app
+  selfLink: /apis/build.openshift.io/v1/namespaces/hpe-demo/buildconfigs/java-app
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: java-app:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      uri: https://github.com/roshans416/openshift-s2i-demo
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: s2i-maven-builder:latest
+        namespace: hpe-demo
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - github:
+      secret: 8oJ4IZ1vYnEChNn4c8Zr
+    type: GitHub
+  - generic:
+      secret: HHVU20P-TY23d3tfPP7R
+    type: Generic
+  - type: ConfigChange
+  - imageChange:
+      lastTriggeredImageID: docker-registry.default.svc:5000/hpe-demo/s2i-maven-builder@sha256:9c859284ae05de4075df666018d9f103e1d517dceeff09fd021d54d85944f658
+    type: ImageChange
+status:
+  lastVersion: 2

@@ -1,0 +1,44 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewBuild
+  creationTimestamp: null
+  labels:
+    build: s2i-maven-builder
+  name: s2i-maven-builder
+  selfLink: /apis/build.openshift.io/v1/namespaces/hpe-demo/buildconfigs/s2i-maven-builder
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: s2i-maven-builder:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      uri: https://github.com/roshans416/openshift-s2i-maven
+    type: Git
+  strategy:
+    dockerStrategy:
+      from:
+        kind: ImageStreamTag
+        name: base-centos7:latest
+    type: Docker
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - github:
+      secret: v2omMPhnNPqCPZ7EV1DR
+    type: GitHub
+  - generic:
+      secret: QddgRDHygnLt1EZ50coB
+    type: Generic
+  - type: ConfigChange
+  - imageChange:
+      lastTriggeredImageID: openshift/base-centos7@sha256:aea292a3bddba020cde0ee83e6a45807931eb607c164ec6a3674f67039d8cd7c
+    type: ImageChange
+status:
+  lastVersion: 4
