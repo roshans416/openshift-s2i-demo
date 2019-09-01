@@ -58,6 +58,15 @@ stages {
 }
 
   stage("DEPLOY TO DEV") {
+  when {
+      expression {
+          openshift.withCluster() {
+          openshift.withProject(env.DEV_PROJECT) {
+              return !openshift.selector("dc", "${APP_NAME}").exists();
+              }
+          }
+      }
+  }
   steps {
     script {
         openshift.withCluster() {
