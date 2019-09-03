@@ -7,7 +7,7 @@ environment {
     GIT_REPO="http://github.com/roshans416/openshift-s2i-demo"
     GIT_BRANCH="master"
     STAGE_TAG = "promoteToQA"
-    DEV_PROJECT = "dev"
+    DEV_PROJECT = "roshan-project"
     PROD_PROJECT = "prod"
     IMAGE_BUILDER = "s2i-maven-builder"
     ARTIFACT_FOLDER = "target"
@@ -38,7 +38,8 @@ stages {
         script {
             openshift.withCluster() {
                 openshift.withProject(env.DEV_PROJECT) {
-                    openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}", "--image-stream=${IMAGE_BUILDER}")
+                   // openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}", "--image-stream=${IMAGE_BUILDER}")
+                   openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}")
                 }
             }
         }
