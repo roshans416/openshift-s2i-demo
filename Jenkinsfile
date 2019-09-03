@@ -41,7 +41,7 @@ stages {
                 openshift.withProject(env.DEV_PROJECT) {
                    // openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}", "--image-stream=${IMAGE_BUILDER}")
                    //openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}")
-                  openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}", "--source-image=${IMAGE_BUILDER}")
+                  openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}", "--source-image=${IMAGE_BUILDER}", "--strategy=source")
                 }
             }
         }
