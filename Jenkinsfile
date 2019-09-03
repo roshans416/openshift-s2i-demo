@@ -7,7 +7,7 @@ environment {
     GIT_REPO="http://github.com/roshans416/openshift-s2i-demo"
     GIT_BRANCH="master"
     STAGE_TAG = "promoteToQA"
-    DEV_PROJECT = "hpe-demo"
+    DEV_PROJECT = "dev"
     PROD_PROJECT = "prod"
     IMAGE_BUILDER = "s2i-maven-builder"
     ARTIFACT_FOLDER = "target"
