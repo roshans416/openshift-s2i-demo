@@ -9,7 +9,7 @@ environment {
     STAGE_TAG = "promoteToQA"
     DEV_PROJECT = "roshan"
     PROD_PROJECT = "prod"
-    IMAGE_BUILDER = "s2i-maven-builder"
+    IMAGE_BUILDER = "maven-s2i-builder"
     // IMAGE_BUILDER = "quay.io/roshantn/maven-s2i-builder"
     ARTIFACT_FOLDER = "target"
     PORT = 8080;
