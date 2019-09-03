@@ -9,8 +9,8 @@ environment {
     STAGE_TAG = "promoteToQA"
     DEV_PROJECT = "roshan-project"
     PROD_PROJECT = "prod"
-    //IMAGE_BUILDER = "s2i-maven-builder"
-    IMAGE_BUILDER = "quay.io/roshantn/maven-s2i-builder"
+    IMAGE_BUILDER = "s2i-maven-builder"
+    // IMAGE_BUILDER = "quay.io/roshantn/maven-s2i-builder"
     ARTIFACT_FOLDER = "target"
     PORT = 8080;
 }
@@ -39,9 +39,9 @@ stages {
         script {
             openshift.withCluster() {
                 openshift.withProject(env.DEV_PROJECT) {
-                   // openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}", "--image-stream=${IMAGE_BUILDER}")
+                   openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}", "--image-stream=${IMAGE_BUILDER}")
                    //openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}")
-                  openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}", "--docker-image=${IMAGE_BUILDER}", "--strategy=source")
+                  //openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}", "--docker-image=${IMAGE_BUILDER}", "--strategy=source")
                 }
             }
         }
