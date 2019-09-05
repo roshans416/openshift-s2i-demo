@@ -24,6 +24,7 @@ def idApp = ''
                      build_ok = false
                      echo e.toString()
 } 
+	}
 
 /*
 	// Analyse the code for vulnerabilities using SCA
