@@ -19,7 +19,7 @@ def idApp = ''
           stage('Destroy') {
                 sh "oc4 login --insecure-skip-tls-verify -u kubeadmin -p epCzU-meW75-inPMR-ELwix --server=https://api.upi.testkube.org:6443"
 		sh "oc4 project roshan"
-		sh "oc4 get pods"
+		//sh "oc4 get pods"
                 //sh "oc4 delete project mf-php" }
 	  }
 	}
@@ -29,18 +29,18 @@ def idApp = ''
 } 
 	}
 
-/*
+
 	// Analyse the code for vulnerabilities using SCA
-	stage 'SCA'
+stage('SCA') {
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook -clean"
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook-mf *.java"
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook -scan -f adressbook.fpr"
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/ReportGenerator -format xml -source addressbook.fpr -f test.xml"
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/ReportGenerator -format rtf -source addressbook.fpr -f test.rtf"
 	sh "cp test.rtf /var/lib/jenkins"
-        sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/fortifyclient -url http://192.168.12.191:8080/ssc -authtoken f11727d6-fd70-4dd1-b7e4-78bb03fc869d uploadFPR -file openshift-mf.fpr -project php-safe -version 1"
+        sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/fortifyclient -url http://192.168.12.191:8080/ssc -authtoken f11727d6-fd70-4dd1-b7e4-78bb03fc869d uploadFPR -file openshift-mf.fpr -project addressbook -version 1"
 //        sh " http -f POST http://192.168.12.191:8080/ssc/upload/resultFileUpload.html?mat=MzRmM2QxZWUtMzVkMy00NDk0LThjZmMtNGMwMWYxMGM3OGQ4 entityId=26112 files[]@php-safe.fpr"
-*/
+}
 
 /*
         script {
