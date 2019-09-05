@@ -19,10 +19,9 @@ def idApp = ''
           stage('Destroy') {
                 sh "oc4 login --insecure-skip-tls-verify -u kubeadmin -p epCzU-meW75-inPMR-ELwix --server=https://api.upi.testkube.org:6443"
 		sh "oc4 project roshan"
-		//sh "oc4 get pods"
-                //sh "oc4 delete project mf-php" }
+
 	  }
-	}
+    }
           catch(e) {
                      build_ok = false
                      echo e.toString()
@@ -30,7 +29,7 @@ def idApp = ''
 
 
 	// Analyse the code for vulnerabilities using SCA
-stage('SCA') {
+  stage 'SCA' {
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook -clean"
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook *.java"
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook -scan -f adressbook.fpr"
