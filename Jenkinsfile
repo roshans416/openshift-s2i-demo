@@ -27,7 +27,6 @@ def idApp = ''
                      build_ok = false
                      echo e.toString()
 } 
-	}
 
 
 	// Analyse the code for vulnerabilities using SCA
@@ -41,7 +40,7 @@ stage('SCA') {
         sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/fortifyclient -url http://192.168.12.191:8080/ssc -authtoken f11727d6-fd70-4dd1-b7e4-78bb03fc869d uploadFPR -file openshift-mf.fpr -project addressbook -version 1"
 //        sh " http -f POST http://192.168.12.191:8080/ssc/upload/resultFileUpload.html?mat=MzRmM2QxZWUtMzVkMy00NDk0LThjZmMtNGMwMWYxMGM3OGQ4 entityId=26112 files[]@php-safe.fpr"
 }
-
+    }
 /*
         script {
           tokenNeeded = sh (returnStdout: true, script: '/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/fortifyclient -url http://192.168.12.191:8080/ssc token -gettoken AnalysisUploadToken -user admin -password redhat12redhat |cut -c 22-57')
