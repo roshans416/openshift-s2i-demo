@@ -33,7 +33,7 @@ def idApp = ''
 	// Analyse the code for vulnerabilities using SCA
 stage('SCA') {
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook -clean"
-	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook-mf *.java"
+	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook *.java"
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook -scan -f adressbook.fpr"
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/ReportGenerator -format xml -source addressbook.fpr -f test.xml"
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/ReportGenerator -format rtf -source addressbook.fpr -f test.rtf"
