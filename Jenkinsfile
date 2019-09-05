@@ -29,7 +29,7 @@ def idApp = ''
 
 
 	// Analyse the code for vulnerabilities using SCA
-  stage 'SCA' {
+  stage 'SCA'
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook -clean"
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook *.java"
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook -scan -f adressbook.fpr"
@@ -38,7 +38,6 @@ def idApp = ''
 	sh "cp test.rtf /var/lib/jenkins"
         sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/fortifyclient -url http://192.168.12.191:8080/ssc -authtoken f11727d6-fd70-4dd1-b7e4-78bb03fc869d uploadFPR -file openshift-mf.fpr -project addressbook -version 1"
 //        sh " http -f POST http://192.168.12.191:8080/ssc/upload/resultFileUpload.html?mat=MzRmM2QxZWUtMzVkMy00NDk0LThjZmMtNGMwMWYxMGM3OGQ4 entityId=26112 files[]@php-safe.fpr"
-}
     }
 /*
         script {
