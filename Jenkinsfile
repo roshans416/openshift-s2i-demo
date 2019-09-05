@@ -19,7 +19,8 @@ def idApp = ''
           stage('Destroy') {
                 sh "oc4 login --insecure-skip-tls-verify -u kubeadmin -p epCzU-meW75-inPMR-ELwix --server=https://api.upi.testkube.org:6443"
                 //sh "oc4 delete project mf-php" }
-}
+	  }
+	}
           catch(e) {
                      build_ok = false
                      echo e.toString()
