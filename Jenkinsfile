@@ -3,7 +3,7 @@ pipeline {
       node {label 'maven'}
     }
 environment {
-    APP_NAME = "java-app"
+    APP_NAME = "java-app-pipeline"
     GIT_REPO="http://github.com/roshans416/openshift-s2i-demo"
     GIT_BRANCH="master"
     STAGE_TAG = "promoteToQA"
@@ -39,7 +39,7 @@ stages {
         script {
             openshift.withCluster() {
                 openshift.withProject(env.DEV_PROJECT) {
-                   openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}", "--image-stream=${IMAGE_BUILDER}")
+                   openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}", "--image-stream=${IMAGE_BUILDER}", "--strategy=source")
                    //openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}")
                   //openshift.newBuild("${GIT_REPO}", "--name=${APP_NAME}", "--docker-image=${IMAGE_BUILDER}", "--strategy=source")
                 }
