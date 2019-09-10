@@ -85,7 +85,7 @@ def idApp = ''
         stage 'Build'
 	sh "oc login --insecure-skip-tls-verify https://console.ocexternal.linuxthoughts.com:8443 --token=iGJuEzs1uEpKAaWi2bqdBvVIKKZfH31GMxBibpz1t2I"
         //sh "oc new-build https://github.com/roshans416/openshift-s2i-demo --name=java-app --strategy=source --docker-image=quay.io/roshantn/maven-s2
-i-builder --to-docker=true --to=quay.io/roshantn/java-app --push-secret=quay-secret"
+//i-builder --to-docker=true --to=quay.io/roshantn/java-app --push-secret=quay-secret"
          sh "oc project pipeline-demo"
 	 sh "oc start-build java-app --wait=true"
 
