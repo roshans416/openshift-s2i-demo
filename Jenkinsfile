@@ -14,7 +14,7 @@ def idApp = ''
         stage 'Checkout'
         checkout scm
 
-//        clean all
+/* //        clean all
         try {
           stage('Destroy') {
                 sh "oc4 login --insecure-skip-tls-verify -u kubeadmin -p epCzU-meW75-inPMR-ELwix --server=https://api.upi.testkube.org:6443"
@@ -26,7 +26,7 @@ def idApp = ''
                      build_ok = false
                      echo e.toString()
 } 
-
+*/
 
 	// Analyse the code for vulnerabilities using SCA
   /* stage 'SCA'
@@ -66,6 +66,11 @@ def idApp = ''
 //i-builder --to-docker=true --to=quay.io/roshantn/java-app --push-secret=quay-secret"
          sh "oc project pipeline-demo"
 	 sh "oc start-build java-app --wait=true"
+	    
+	 // Image scanning
+	 
+	 stage 'IMAGE SCANNING'
+	 aquaMicroscanner imageName: 'busybox', notCompliesCmd: '', onDisallowed: 'ignore', outputFormat: 'html'
 
         // run the container
         stage 'Deploy'
