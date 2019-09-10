@@ -69,8 +69,8 @@ def idApp = ''
 	    
 	 // Image scanning
 	 
-	 stage 'IMAGE SCANNING'
-	 aquaMicroscanner imageName: 'busybox', notCompliesCmd: '', onDisallowed: 'ignore', outputFormat: 'html'
+	 //stage 'IMAGE SCANNING'
+	 //aquaMicroscanner imageName: 'busybox', notCompliesCmd: '', onDisallowed: 'ignore', outputFormat: 'html'
 
         // run the container
         stage 'Deploy'
