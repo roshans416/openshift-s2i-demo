@@ -68,6 +68,10 @@ def idApp = ''
 	 sh "oc start-build java-app --wait=true"
 	    
 	 // Image scanning
+	  stage 'Scan'
+	  withDockerRegistry(credentialsId: 'quay-login', url: 'quay.io') {
+    aquaMicroscanner imageName: 'quay.io/roshantn/java-app', notCompliesCmd: '', onDisallowed: 'ignore', outputFormat: 'html'
+}
 	 
 	 //stage 'IMAGE SCANNING'
 	 //aquaMicroscanner imageName: 'busybox', notCompliesCmd: '', onDisallowed: 'ignore', outputFormat: 'html'
