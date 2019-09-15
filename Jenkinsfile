@@ -86,6 +86,9 @@ def idApp = ''
         
         sh "oc project pipeline-demo"
     	//sh "oc4 adm  policy add-scc-to-user anyuid -z default"
-        sh "oc new-app --docker-image=quay.io/roshantn/java-app:latest"
+        //sh "oc new-app --docker-image=quay.io/roshantn/java-app:latest"
+	sh "oc delete dc,svc,route java-app"
+	sh "oc run java-app --image=quay.io/roshantn/java-app:latest --restart=Always --image-pull-policy=Always"
+	sh "oc expose dc/java-app --port=8080"
 	sh "oc expose svc/java-app"
     }
