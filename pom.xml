@@ -14,7 +14,16 @@
         <vaadin.version>8.0.0.alpha2</vaadin.version>
         <vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
     </properties>
-
+        <distributionManagement>
+    <repository>
+        <id>nexus-release</id>
+        <url>http://35.213.193.81:8081/repository/maven-releases</url>
+    </repository>
+    <snapshotRepository>
+        <id>nexus-snapshot</id>
+        <url>http://35.213.193.81:8081/repository/maven-snapshots</url>
+    </snapshotRepository>
+</distributionManagement>
     <repositories>
         <repository>
             <id>vaadin-prereleases</id>
