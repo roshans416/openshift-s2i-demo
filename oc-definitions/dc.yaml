@@ -18,7 +18,7 @@ spec:
         run: java-app
     spec:
       containers:
-      - image: docker-registry.default.svc:5000/hpe-demo/java-app:latest
+      - image: quay.io/roshantn/java-app:latest
         name: java-app
         resources:
           limits:
