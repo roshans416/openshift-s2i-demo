@@ -88,6 +88,8 @@ def idApp = ''
     	//sh "oc adm  policy add-scc-to-user anyuid -z default"
         //sh "oc new-app --docker-image=quay.io/roshantn/java-app:latest"
 	sh "oc delete dc,svc,route java-app"
-	sh "oc new-app java-app --name=java-app"
+	sh " oc run --image=quay.io/roshantn/java-app@sha256:cab381095c72acff0e5251b2bcad7cbbb3b41ecf4a6992cf93e9cf2a261f5bc5 java-app"
+	sh "oc expose dc/java-app --port=8080
+	//sh "oc new-app java-app --name=java-app"
 	sh "oc expose svc/java-app"
     }
