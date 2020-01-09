@@ -85,10 +85,9 @@ def idApp = ''
         stage 'Deploy'
         
         sh "oc project ocp-demo"
-    	sh "oc adm  policy add-scc-to-user anyuid -z default"
-        sh "oc new-app --docker-image=quay.io/roshantn/java-app:latest"
-	//sh "oc delete dc,svc,route java-app"
-	//sh "oc run java-app --image=quay.io/roshantn/java-app:latest --restart=Always --image-pull-policy=Always"
-	//sh "oc expose dc/java-app --port=8080"
-	//sh "oc expose svc/java-app"
+    	//sh "oc adm  policy add-scc-to-user anyuid -z default"
+        //sh "oc new-app --docker-image=quay.io/roshantn/java-app:latest"
+	sh "oc delete dc,svc,route java-app"
+	sh "oc new-app java-app --name=java-app"
+	sh "oc expose svc/java-app"
     }
