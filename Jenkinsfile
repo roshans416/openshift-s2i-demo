@@ -61,22 +61,22 @@ def idApp = ''
       
         // Build the app 
         stage 'Build'
-	withCredentials([string(credentialsId: 'openshift-secret-token', variable: 'openshift_creds')]) {
-   sh "oc login --insecure-skip-tls-verify https://console.ocexternal.linuxthoughts.com:8443 --token=$openshift_creds"
+	withCredentials([usernamePassword(credentialsId: 'kubecreds', passwordVariable: 'password', usernameVariable: 'username')]) {
+   sh "oc login --insecure-skip-tls-verify https://api.ocpdemo.linuxthoughts.com:6443 -u $username -p $password"
         //sh "oc new-build https://github.com/roshans416/openshift-s2i-demo --name=java-app --strategy=source --docker-image=quay.io/roshantn/maven-s2
 //i-builder --to-docker=true --to=quay.io/roshantn/java-app --push-secret=quay-secret"
-         sh "oc project pipeline-demo"
+         sh "oc project ocp-demo"
 	 sh "oc start-build java-app --wait=true"
 }
 	
 	 // IMAGE SCANNING
-	  stage 'IMAGE SCAN'
+	/*  stage 'IMAGE SCAN'
 	    withCredentials([usernamePassword(credentialsId: 'quay-login', passwordVariable: 'quay_pass', usernameVariable: 'quay_user')]) {
         sh "docker login quay.io -u $quay_user -p $quay_pass" 
         sh "docker pull quay.io/roshantn/java-app"
         aquaMicroscanner imageName: 'quay.io/roshantn/java-app', notCompliesCmd: '', onDisallowed: 'ignore', outputFormat: 'html'
 }
-	    
+*/	    
 	 
 	 //stage 'IMAGE SCANNING'
 	 //aquaMicroscanner imageName: 'busybox', notCompliesCmd: '', onDisallowed: 'ignore', outputFormat: 'html'
