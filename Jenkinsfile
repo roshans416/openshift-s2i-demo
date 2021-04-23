@@ -29,7 +29,7 @@ def idApp = ''
 */
 
 	// Analyse the code for vulnerabilities using SCA
-  /* stage 'SCA'
+   stage 'SCA'
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook -clean"
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook *.java"
 	sh "/opt/Fortify/Fortify_SCA_and_Apps_19.1.0/bin/sourceanalyzer -b addressbook -scan -f adressbook.fpr"
@@ -57,31 +57,27 @@ def idApp = ''
 	currentBuild.result = 'FAILURE'
 	sh "exit ${answerQuestion}" 
 	}
-*/
       
         // Build the app 
         stage 'Build'
 	withCredentials([usernamePassword(credentialsId: 'kubecreds', passwordVariable: 'password', usernameVariable: 'username')]) {
    sh "oc login --insecure-skip-tls-verify https://api.ocpdemo.linuxthoughts.com:6443 -u $username -p $password"
-        //sh "oc new-build https://github.com/roshans416/openshift-s2i-demo --name=java-app --strategy=source --docker-image=quay.io/roshantn/maven-s2
-//i-builder --to-docker=true --to=quay.io/roshantn/java-app --push-secret=quay-secret"
+        sh "oc new-build https://github.com/roshans416/openshift-s2i-demo --name=java-app --strategy=source --docker-image=quay.io/roshantn/maven-s2i-builder --to-docker=true --to=quay.io/roshantn/java-app --push-secret=quay-secret"
          sh "oc project ocp-demo"
 	 sh "oc start-build java-app --wait=true"
 }
 	
-	 // IMAGE SCANNING
-	/*  stage 'IMAGE SCAN'
+	 // IMAGE SCANNING USING AQUA MICROSCANNER
+	 stage 'IMAGE SCAN'
 	    withCredentials([usernamePassword(credentialsId: 'quay-login', passwordVariable: 'quay_pass', usernameVariable: 'quay_user')]) {
         sh "docker login quay.io -u $quay_user -p $quay_pass" 
         sh "docker pull quay.io/roshantn/java-app"
         aquaMicroscanner imageName: 'quay.io/roshantn/java-app', notCompliesCmd: '', onDisallowed: 'ignore', outputFormat: 'html'
 }
-*/	    
+	   
 	 
-	 //stage 'IMAGE SCANNING'
-	 //aquaMicroscanner imageName: 'busybox', notCompliesCmd: '', onDisallowed: 'ignore', outputFormat: 'html'
 
-        // run the container
+        // Deploy the application to OpenShift
         stage 'Deploy'
         
         sh "oc project ocp-demo"
